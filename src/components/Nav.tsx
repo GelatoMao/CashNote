@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import Icon from "components/Icon"
 
-
 const NavWrapper = styled.nav`
   /* border: 1px solid blue; */
   line-height: 24px;
@@ -11,14 +10,16 @@ const NavWrapper = styled.nav`
     display: flex;
     > li {
       width: 33.3333%;
-      padding: 4px 0;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .icon {
-        width: 24px;
-        height: 24px;
+      > a {
+        padding: 4px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .icon {
+          width: 24px;
+          height: 24px;
+        }
       }
     }
   }
@@ -28,16 +29,22 @@ const Nav = () => {
     <NavWrapper>
       <ul>
         <li>
-          <Icon name="tag" />
-          <Link to="/tags">标签</Link>
+          <Link to="/tags">
+            标签
+            <Icon name="tag" />
+          </Link>
         </li>
         <li>
-          <Icon name="money" />
-          <Link to="/money">记账</Link>
+          <Link to="/money">
+            记账
+            <Icon name="money" />
+          </Link>
         </li>
         <li>
-          <Icon name="statistic" />
-          <Link to="/statistics">统计</Link>
+          <Link to="/statistics">
+            统计
+            <Icon name="statistic" />
+          </Link>
         </li>
       </ul>
     </NavWrapper>
