@@ -60,7 +60,17 @@ const Wrapper = styled.section`
 `
 
 const NumberPadSection: React.FC = () => {
-  const [output, setOutput] = useState("0")
+  const [output, _setOutput] = useState("0")
+  // 对setOutput重新进行封装
+  const setOutput = (output: string) => {
+    if (output.length > 16) {
+      output = output.slice(0, 16)
+    }
+    if (output.length === 0) {
+      output = "0"
+    }
+    _setOutput(output)
+  }
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).innerHTML
     if (text === null) return
@@ -82,13 +92,22 @@ const NumberPadSection: React.FC = () => {
         }
         break
       case ".":
-        setOutput(text)
+        // 如果已经有一个点了 应该什么都不做
+        if (output.indexOf(".") >= 0) {
+          return
+        }
+        setOutput(output + text)
         break
       case "删除":
+        if (output.length === 1) {
+          setOutput("")
+        } else {
+          setOutput(output.slice(0, -1))
+        }
         setOutput(text)
         break
       case "清空":
-        setOutput(text)
+        setOutput("0")
         break
       case "OK":
         setOutput(text)
