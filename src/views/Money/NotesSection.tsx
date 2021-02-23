@@ -20,12 +20,17 @@ const Wrapper = styled.section`
     }
   }
 `
-const NotesSection: React.FC = () => {
-  const [notes, setNotes] = useState("")
+type Props = {
+  value: string
+  onChange: (value: string) => void
+}
+const NotesSection: React.FC<Props> = (props) => {
+  // const [notes, setNotes] = useState("")
+  const note = props.value
   const refInput = useRef<HTMLInputElement>(null)
   const onBlur = () => {
     if (refInput.current !== null) {
-      setNotes(refInput.current.value)
+      props.onChange(refInput.current.value)
     }
   }
   return (
@@ -36,7 +41,7 @@ const NotesSection: React.FC = () => {
           type="text"
           placeholder="添加备注"
           ref={refInput}
-          defaultValue={notes}
+          defaultValue={note}
           onBlur={onBlur}
         />
       </label>

@@ -17,9 +17,14 @@ const generateOutput = (text: string, output = "0") => {
       }
     case ".":
       if (output.indexOf(".") >= 0) {
+        console.log('11');
+        
         return output
+      } else {
+        console.log('22');
+        
+        return output + text
       }
-      return output + text
     case "删除":
       if (output.length === 1) {
         return ""

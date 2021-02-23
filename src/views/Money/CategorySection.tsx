@@ -25,11 +25,15 @@ const Wrapper = styled.section`
     }
   }
 `
-
-const CategorySection: React.FC = () => {
+type Props = {
+  value: "-" | "+"
+  onChange: (value: "-" | "+") => void
+}
+const CategorySection: React.FC<Props> = (props) => {
   const [categoryList] = useState<("-" | "+")[]>(["-", "+"])
   // +号表示收入 -号表示支出
-  const [category, setCategory] = useState("-")
+  // const [category, setCategory] = useState("-")
+  const category = props.value
   // 利用哈希使得减号与支出对应 加号与收入对应
   const categoryMap = { "-": "支出", "+": "收入" }
   return (
@@ -39,9 +43,7 @@ const CategorySection: React.FC = () => {
           <li
             key={c}
             className={category === c ? "selected" : ""}
-            onClick={() => {
-              setCategory(c)
-            }}
+            onClick={() => props.onChange(c)}
           >
             {categoryMap[c]}
           </li>

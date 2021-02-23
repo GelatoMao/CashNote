@@ -18,7 +18,7 @@ const Wrapper = styled.section`
       padding: 3px 18px;
       font-size: 14px;
       margin: 8px 12px;
-      &.selected{
+      &.selected {
         background: #f60;
       }
     }
@@ -32,11 +32,13 @@ const Wrapper = styled.section`
     margin-top: 8px;
   }
 `
+type Props = { value: string[]; onChange: (selected: string[]) => void }
 // 封装函数组件
-const TagsSection: React.FC = (props) => {
+const TagsSection: React.FC<Props> = (props) => {
   // 圆括号里面传值 尖括号里面传类型
   const [tags, setTags] = useState<string[]>(["衣", "食", "住", "行"])
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
+  // const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const selectedTags = props.value
 
   const onAddTag = () => {
     const tagName = window.prompt("新标签的名称为:")
@@ -50,9 +52,9 @@ const TagsSection: React.FC = (props) => {
     const index = selectedTags.indexOf(tag)
     if (index >= 0) {
       // 如果 tag 已被选中 就复制所有没有被选中的 tag 作为新的 selectedTag
-      setSelectedTags(selectedTags.filter((t) => t !== tag))
+      props.onChange(selectedTags.filter((t) => t !== tag))
     } else {
-      setSelectedTags([...selectedTags, tag])
+      props.onChange([...selectedTags, tag])
     }
   }
 
