@@ -13,7 +13,8 @@ const MyLayout = styled(Layout)`
 type Category = "-" | "+"
 function Money() {
   const [selected, setSelected] = useState({
-    tags: [] as string[],
+    // selected里面只有id值 所以是number[]
+    tagIds: [] as number[],
     note: "",
     category: "-" as Category,
     amount: 0,
@@ -29,7 +30,7 @@ function Money() {
   }
   return (
     <MyLayout>
-      {selected.tags.join(",")}
+      {selected.tagIds.join(",")}
       <hr />
       {selected.note}
       <hr />
@@ -37,8 +38,8 @@ function Money() {
       <hr />
       {selected.amount}
       <TagsSection
-        value={selected.tags}
-        onChange={(tags) => onChange({ tags })}
+        value={selected.tagIds}
+        onChange={(tagIds) => onChange({ tagIds })}
       />
       <NotesSection
         value={selected.note}
