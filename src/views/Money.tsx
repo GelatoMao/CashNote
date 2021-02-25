@@ -18,7 +18,6 @@ function Money() {
     category: "-" as Category,
     amount: 0,
   })
-
   // typeof 可以获取一个值的类型
   type Selected = typeof selected
   // 部分selected obj 可以是selected对象的一部分

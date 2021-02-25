@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
+import { useTags } from "useTags"
 
 const Wrapper = styled.section`
   background-color: #fff;
@@ -36,7 +37,7 @@ type Props = { value: string[]; onChange: (selected: string[]) => void }
 // 封装函数组件
 const TagsSection: React.FC<Props> = (props) => {
   // 圆括号里面传值 尖括号里面传类型
-  const [tags, setTags] = useState<string[]>(["衣", "食", "住", "行"])
+  const { tags, setTags } = useTags()
   // const [selectedTags, setSelectedTags] = useState<string[]>([])
   const selectedTags = props.value
 
