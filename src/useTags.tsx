@@ -1,18 +1,31 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { createId } from "lib/createId"
+import { useUpdate } from "hooks/useUpdate"
 
-// 因为每次使用useTags都会重新调用createId() 所以这个方法不能写在useState里面
-const defaultTags = [
-  { id: createId(), name: "衣" },
-  { id: createId(), name: "食" },
-  { id: createId(), name: "住" },
-  { id: createId(), name: "行" },
-]
 // 封装一个自定义hook
 const useTags = () => {
   // 不应该是字符串类型 应该是一个有id属性的对象
   // const [tags, setTags] = useState<string[]>(["衣", "食", "住", "行"])
-  const [tags, setTags] = useState<{ id: number; name: string }[]>(defaultTags)
+  const [tags, setTags] = useState<{ id: number; name: string }[]>([])
+  useEffect(() => {
+    let localTags = JSON.parse(window.localStorage.getItem("tags") || "[]")
+    if (localTags.length === 0) {
+      // 因为每次使用useTags都会重新调用createId() 所以这个方法不能写在useState里面
+      localTags = [
+        { id: createId(), name: "衣" },
+        { id: createId(), name: "食" },
+        { id: createId(), name: "住" },
+        { id: createId(), name: "行" },
+      ]
+    }
+    setTags(localTags)
+  }, []) // 组件挂载时执行
+  useUpdate(() => {
+    console.log("set item")
+    console.log(JSON.stringify(tags))
+    window.localStorage.setItem("tags", JSON.stringify(tags))
+  }, [tags])
+
   const findTag = (id: number) => tags.filter((tag) => tag.id === id)[0]
   const findTagIndex = (id: number) => {
     // 需要考虑id不存在的情况 设置result初始值为-1 然后不直接返回index 而是返回result
@@ -47,6 +60,13 @@ const useTags = () => {
     // tagsClone.splice(index, 1)
     // setTags(tagsClone)
   }
-  return { tags, setTags, findTag, updateTag, findTagIndex, deleteTag }
+
+  const addTag = () => {
+    const tagName = window.prompt("新标签的名称为:")
+    if (tagName !== null && tagName !== "") {
+      setTags([...tags, { id: createId(), name: tagName }])
+    }
+  }
+  return { tags, setTags, findTag, updateTag, findTagIndex, deleteTag, addTag }
 }
 export { useTags }

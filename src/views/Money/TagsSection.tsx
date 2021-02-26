@@ -38,16 +38,9 @@ type Props = { value: number[]; onChange: (selected: number[]) => void }
 // 封装函数组件
 const TagsSection: React.FC<Props> = (props) => {
   // 圆括号里面传值 尖括号里面传类型
-  const { tags, setTags } = useTags()
+  const { tags, setTags, addTag } = useTags()
   // const [selectedTags, setSelectedTags] = useState<string[]>([])
   const selectedTagIds = props.value
-
-  const onAddTag = () => {
-    const tagName = window.prompt("新标签的名称为:")
-    if (tagName !== null) {
-      setTags([...tags, { id: createId(), name: tagName }])
-    }
-  }
 
   // 多消化
   const onToggleTag = (tagId: number) => {
@@ -73,7 +66,7 @@ const TagsSection: React.FC<Props> = (props) => {
           </li>
         ))}
       </ol>
-      <button onClick={onAddTag}>新增标签</button>
+      <button onClick={addTag}>新增标签</button>
     </Wrapper>
   )
 }
