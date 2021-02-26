@@ -27,25 +27,14 @@ const InputWrapper = styled.div`
   padding: 0 16px;
   margin-top: 8px;
 `
-
 const Tag: React.FC = (props) => {
-  const { findTag, updateTag } = useTags()
+  const { findTag, updateTag, deleteTag } = useTags()
   // 将 id 重命名为 idString
   const { id: idString } = useParams<Params>()
   const tag = findTag(parseInt(idString))
-  
-  return (
-    <Layout>
-      <Topbar>
-        <Icon name="left" />
-        <span>编辑标签</span>
-        <Icon />
-      </Topbar>
+  const tagContent = (tag: { id: number; name: string }) => (
+    <div>
       <InputWrapper>
-        {/* <label>
-          <span>标签名</span>
-          <input type="text" placeholder="标签名" />
-        </label> */}
         <Input
           label="标签名"
           type="text"
@@ -60,8 +49,20 @@ const Tag: React.FC = (props) => {
         <Space />
         <Space />
         <Space />
-        <Button>删除标签</Button>
+        <Button onClick={() => deleteTag(tag.id)}>删除标签</Button>
       </Center>
+    </div>
+  )
+
+  // tag存在 才进行渲染 防止tag被删除后不存在 还继续读取tag.name而报错
+  return (
+    <Layout>
+      <Topbar>
+        <Icon name="left" />
+        <span>编辑标签</span>
+        <Icon />
+      </Topbar>
+      {tag ? tagContent(tag) : <Center>tag不存在</Center>}
     </Layout>
   )
 }
