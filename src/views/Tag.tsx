@@ -1,5 +1,5 @@
 import React from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import styled from "styled-components"
 import { useTags } from "useTags"
 import Layout from "components/Layout"
@@ -54,14 +54,19 @@ const Tag: React.FC = (props) => {
     </div>
   )
 
-  // tag存在 才进行渲染 防止tag被删除后不存在 还继续读取tag.name而报错
+  const history = useHistory()
+  const onClickBack = () => {
+    history.goBack()
+  }
+
   return (
     <Layout>
       <Topbar>
-        <Icon name="left" />
+        <Icon name="left" onClick={onClickBack} />
         <span>编辑标签</span>
         <Icon />
       </Topbar>
+      {/* tag存在 才进行渲染 防止tag被删除后不存在 还继续读取tag.name而报错 */}
       {tag ? tagContent(tag) : <Center>tag不存在</Center>}
     </Layout>
   )

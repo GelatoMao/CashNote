@@ -27,18 +27,25 @@ const useTags = () => {
     return result
   }
   const updateTag = (id: number, obj: { name: string }) => {
-    const index = findTagIndex(id)
-    // 深拷贝 tags
-    const tagsClone = JSON.parse(JSON.stringify(tags))
-    // 把 tagsClone的第 index 删掉 换成{id:id, name:obj.name}
-    tagsClone.splice(index, 1, { id: id, name: obj.name })
-    setTags(tagsClone)
+    setTags(
+      tags.map((tag) => {
+        return tag.id === id ? { id, name: obj.name } : tag
+      })
+    )
+    // const index = findTagIndex(id)
+    // // 深拷贝 tags
+    // const tagsClone = JSON.parse(JSON.stringify(tags))
+    // // 把 tagsClone的第 index 删掉 换成{id:id, name:obj.name}
+    // tagsClone.splice(index, 1, { id: id, name: obj.name })
+    // setTags(tagsClone)
   }
   const deleteTag = (id: number) => {
-    const index = findTagIndex(id)
-    const tagsClone = JSON.parse(JSON.stringify(tags))
-    tagsClone.splice(index, 1)
-    setTags(tagsClone)
+    // 将不是这个id的数据都留下来就OK了
+    setTags(tags.filter((tag) => tag.id !== id))
+    // const index = findTagIndex(id)
+    // const tagsClone = JSON.parse(JSON.stringify(tags))
+    // tagsClone.splice(index, 1)
+    // setTags(tagsClone)
   }
   return { tags, setTags, findTag, updateTag, findTagIndex, deleteTag }
 }
