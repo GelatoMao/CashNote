@@ -13,8 +13,27 @@ const useTags = () => {
   // 不应该是字符串类型 应该是一个有id属性的对象
   // const [tags, setTags] = useState<string[]>(["衣", "食", "住", "行"])
   const [tags, setTags] = useState<{ id: number; name: string }[]>(defaultTags)
-  const findTag = (id: number) =>
-    tags.filter((tag) => tag.id === id)[0]
-  return { tags, setTags ,findTag}
+  const findTag = (id: number) => tags.filter((tag) => tag.id === id)[0]
+  const findTagIndex = (id: number) => {
+    // 需要考虑id不存在的情况 设置result初始值为-1 然后不直接返回index 而是返回result
+    // 一定要考虑id不存在的情况
+    let result = -1
+    for (let i = 0; i < tags.length; i++) {
+      if (tags[i].id === id) {
+        result = i
+        break
+      }
+    }
+    return result
+  }
+  const updateTag = (id: number, obj: { name: string }) => {
+    const index = findTagIndex(id)
+    // 深拷贝 tags
+    const tagsClone = JSON.parse(JSON.stringify(tags))
+    // 把 tagsClone的第 index 删掉 换成{id:id, name:obj.name}
+    tagsClone.splice(index, 1, { id: id, name: obj.name })
+    setTags(tagsClone)
+  }
+  return { tags, setTags, findTag, updateTag, findTagIndex }
 }
 export { useTags }
