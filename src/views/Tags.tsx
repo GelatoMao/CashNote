@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 import Layout from "components/Layout"
+import { Button } from "components/Button"
 import { useTags } from "useTags"
 import Icon from "components/Icon"
 
@@ -19,15 +20,6 @@ const TagList = styled.ol`
       padding: 12px 16px 12px 0;
     }
   }
-`
-
-const Button = styled.button`
-  font-size: 18px;
-  border: none;
-  padding: 8px 12px;
-  background: #767676;
-  border-radius: 4px;
-  color: white;
 `
 
 const Center = styled.div`
@@ -50,7 +42,8 @@ function Tags() {
           return (
             <li key={tag.id}>
               <Link to={"/tags/" + tag.id}>
-                <span className="oneLine">{tag.name}</span> <Icon name="right" />
+                <span className="oneLine">{tag.name}</span>{" "}
+                <Icon name="right" />
               </Link>
             </li>
           )
