@@ -4,7 +4,6 @@ const useUpdate = (fn: () => void, deps: any[]) => {
   const count = useRef(0)
   useEffect(() => {
     count.current += 1
-    console.log("count" + count.current)
   })
   // 只要tags变化 就将tags存到localStorage里面 useEffect触发要确保每次都是新的对象
   useEffect(() => {

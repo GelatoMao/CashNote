@@ -3,10 +3,10 @@ import styled from "styled-components"
 import { Link } from "react-router-dom"
 import Layout from "components/Layout"
 import { Button } from "components/Button"
-import { useTags } from "useTags"
+import { useTags } from "hooks/useTags"
 import Icon from "components/Icon"
 import { Center } from "components/Center"
-import {Space} from "components/Space"
+import { Space } from "components/Space"
 
 const TagList = styled.ol`
   font-size: 16px;
@@ -24,9 +24,8 @@ const TagList = styled.ol`
   }
 `
 
-
 function Tags() {
-  const { tags ,addTag} = useTags()
+  const { tags, addTag } = useTags()
   return (
     <Layout>
       <TagList>
@@ -34,7 +33,7 @@ function Tags() {
           return (
             <li key={tag.id}>
               <Link to={"/tags/" + tag.id}>
-                <span className="oneLine">{tag.name}</span>{" "}
+                <span className="oneLine">{tag.name}</span>
                 <Icon name="right" />
               </Link>
             </li>

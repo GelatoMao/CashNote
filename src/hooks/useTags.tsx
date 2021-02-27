@@ -21,8 +21,6 @@ const useTags = () => {
     setTags(localTags)
   }, []) // 组件挂载时执行
   useUpdate(() => {
-    console.log("set item")
-    console.log(JSON.stringify(tags))
     window.localStorage.setItem("tags", JSON.stringify(tags))
   }, [tags])
 
