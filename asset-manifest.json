@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/CashNote/static/css/main.60f34e43.chunk.css",
+    "main.js": "/CashNote/static/js/main.53a161ea.chunk.js",
+    "main.js.map": "/CashNote/static/js/main.53a161ea.chunk.js.map",
+    "runtime-main.js": "/CashNote/static/js/runtime-main.88e1a7be.js",
+    "runtime-main.js.map": "/CashNote/static/js/runtime-main.88e1a7be.js.map",
+    "static/js/2.1443eeca.chunk.js": "/CashNote/static/js/2.1443eeca.chunk.js",
+    "static/js/2.1443eeca.chunk.js.map": "/CashNote/static/js/2.1443eeca.chunk.js.map",
+    "index.html": "/CashNote/index.html",
+    "static/css/main.60f34e43.chunk.css.map": "/CashNote/static/css/main.60f34e43.chunk.css.map",
+    "static/js/2.1443eeca.chunk.js.LICENSE.txt": "/CashNote/static/js/2.1443eeca.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.88e1a7be.js",
+    "static/js/2.1443eeca.chunk.js",
+    "static/css/main.60f34e43.chunk.css",
+    "static/js/main.53a161ea.chunk.js"
+  ]
+}
