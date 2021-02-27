@@ -44,7 +44,7 @@ function Money() {
     setSelected(defaultFormData)
   }
   return (
-    <MyLayout>
+    <MyLayout scrollTop={9999}>
       {/* {JSON.stringify(selected)} */}
       <TagsSection
         value={selected.tagIds}
