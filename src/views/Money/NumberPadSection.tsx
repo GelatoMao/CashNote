@@ -9,18 +9,21 @@ type Props = {
 }
 const NumberPadSection: React.FC<Props> = (props) => {
   // const [output, _setOutput] = useState('0')
-  const output = props.value.toString()
+  // const output = props.value.toString()
+  // 有点混乱
+  const [output, _setOutput] = useState(props.value.toString())
   // 对setOutput重新进行封装
   const setOutput = (output: string) => {
-    let value
+    let newOutput: string
     if (output.length > 16) {
-      value = parseFloat(output.slice(0, 16))
+      newOutput = output.slice(0, 16)
     } else if (output.length === 0) {
-      value = 0
+      newOutput = "0"
     } else {
-      value = parseFloat(output)
+      newOutput = output
     }
-    props.onChange(value)
+    _setOutput(newOutput)
+    props.onChange(parseFloat(newOutput))
   }
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).innerHTML
@@ -30,7 +33,6 @@ const NumberPadSection: React.FC<Props> = (props) => {
         props.onOk()
         return
       }
-      
     }
     if ("0123456789.".split("").concat(["删除", "清空"]).indexOf(text) >= 0) {
       setOutput(generateOutput(text, output))
