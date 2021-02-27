@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import { useTags } from "hooks/useTags"
-import { createId } from "lib/createId"
 
 const Wrapper = styled.section`
   background-color: #fff;
@@ -38,7 +37,7 @@ type Props = { value: number[]; onChange: (selected: number[]) => void }
 // 封装函数组件
 const TagsSection: React.FC<Props> = (props) => {
   // 圆括号里面传值 尖括号里面传类型
-  const { tags, setTags, addTag } = useTags()
+  const { tags, addTag } = useTags()
   // const [selectedTags, setSelectedTags] = useState<string[]>([])
   const selectedTagIds = props.value
 
